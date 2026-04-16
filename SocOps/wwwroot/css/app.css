@@ -7,6 +7,10 @@
     --mario-black: #1a1a1a;
     --mario-white: #ffffff;
     --mario-shadow: #4a4a4a;
+    
+    /* Tailwind gradient stops */
+    --tw-gradient-from: initial;
+    --tw-gradient-stops: initial;
 }
 
 html,
@@ -78,6 +82,29 @@ body {
 .bg-mario-gold { background-color: var(--mario-gold); }
 .bg-mario-blue { background-color: var(--mario-blue); }
 .bg-brick { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8c 100%); }
+
+/* Gradient utilities - Tailwind-compatible */
+.bg-gradient-to-r {
+    background-image: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to));
+}
+
+.bg-gradient-to-b {
+    background-image: linear-gradient(to bottom, var(--tw-gradient-from), var(--tw-gradient-to));
+}
+
+.from-blue-500 { --tw-gradient-from: #3b82f6; --tw-gradient-to: transparent; }
+.from-blue-600 { --tw-gradient-from: #2563eb; --tw-gradient-to: transparent; }
+.from-blue-700 { --tw-gradient-from: #1d4ed8; --tw-gradient-to: transparent; }
+.from-blue-800 { --tw-gradient-from: #1e40af; --tw-gradient-to: transparent; }
+
+.to-blue-700 { --tw-gradient-to: #1d4ed8; }
+.to-blue-800 { --tw-gradient-to: #1e40af; }
+.to-blue-900 { --tw-gradient-to: #1e3a8a; }
+
+.from-green-500 { --tw-gradient-from: #10b981; --tw-gradient-to: transparent; }
+.from-green-600 { --tw-gradient-from: #059669; --tw-gradient-to: transparent; }
+
+.to-green-600 { --tw-gradient-to: #059669; }
 
 .text-white { color: #ffffff; }
 .text-gray-500 { color: #6b7280; }
