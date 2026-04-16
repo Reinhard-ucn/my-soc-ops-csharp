@@ -72,11 +72,18 @@ body {
 .bg-white { background-color: #ffffff; }
 .bg-gray-50 { background-color: #f9fafb; }
 .bg-gray-100 { background-color: #f3f4f6; }
+.bg-gray-800 { background-color: #1f2937; }
 .bg-amber-100 { background-color: #fef3c7; }
 .bg-amber-200 { background-color: #fde68a; }
 .bg-accent { background-color: #2563eb; }
 .bg-marked { background-color: #dcfce7; }
 .bg-black\/50 { background-color: rgba(0, 0, 0, 0.5); }
+.bg-blue-600 { background-color: #2563eb; }
+.bg-blue-700 { background-color: #1d4ed8; }
+.bg-red-600 { background-color: #dc2626; }
+.bg-red-700 { background-color: #b91c1c; }
+.bg-yellow-400 { background-color: #facc15; }
+.bg-green-600 { background-color: #16a34a; }
 .bg-mario-red { background-color: var(--mario-red); }
 .bg-mario-green { background-color: var(--mario-green); }
 .bg-mario-gold { background-color: var(--mario-gold); }
@@ -117,6 +124,8 @@ body {
 .text-amber-500 { color: #f59e0b; }
 .text-amber-800 { color: #92400e; }
 .text-amber-900 { color: #78350f; }
+.text-yellow-300 { color: #fcd34d; }
+.text-yellow-400 { color: #facc15; }
 .text-mario-black { color: var(--mario-black); }
 .text-mario-white { color: var(--mario-white); }
 .text-mario-gold { color: var(--mario-gold); }
@@ -142,21 +151,42 @@ body {
 .opacity-90 { opacity: 0.9; }
 
 .h-6 { height: 1.5rem; }
+.h-7 { height: 1.75rem; }
+.h-full { height: 100%; }
 .max-h-96 { max-height: 24rem; }
+.height-2 { height: 0.5rem; }
 
 .overflow-hidden { overflow: hidden; }
 .overflow-y-auto { overflow-y: auto; }
 
 .cursor-pointer { cursor: pointer; }
+.fixed { position: fixed; }
+.absolute { position: absolute; }
+.relative { position: relative; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.bottom-40 { bottom: 10rem; }
+.left-8 { left: 2rem; }
+.left-16 { left: 4rem; }
+.right-12 { right: 3rem; }
+.top-10 { top: 2.5rem; }
+.top-32 { top: 8rem; }
+.z-50 { z-index: 50; }
 
 .hover\:brightness-95:hover { filter: brightness(0.95); }
 .hover\:brightness-110:hover { filter: brightness(1.1); }
 .hover\:shadow-md:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+.hover\:bg-blue-700:hover { background-color: #1d4ed8; }
+.hover\:bg-red-700:hover { background-color: #b91c1c; }
 
 .border { border-width: 1px; }
 .border-b { border-bottom-width: 1px; }
+.border-2 { border-width: 2px; }
+.border-3 { border-width: 3px; }
+.border-4 { border-width: 4px; }
+.border-b-4 { border-bottom-width: 4px; }
 .border-gray-200 { border-color: #e5e7eb; }
 .border-gray-300 { border-color: #d1d5db; }
+.border-gray-900 { border-color: #111827; }
 .border-amber-400 { border-color: #fbbf24; }
 .border-marked-border { border-color: #22c55e; }
 .pixel-border { border: 4px solid var(--mario-black); }
@@ -224,6 +254,17 @@ body {
 }
 
 .space-y-2 > * + * { margin-top: 0.5rem; }
+
+.transition-all { transition: all 150ms linear; }
+.duration-150 { transition-duration: 150ms; }
+.duration-300 { transition-duration: 300ms; }
+.duration-500 { transition-duration: 500ms; }
+
+.aspect-square { aspect-ratio: 1 / 1; }
+
+.select-none { user-select: none; }
+.wrap-break-word { word-wrap: break-word; }
+.hyphens-auto { hyphens: auto; }
 
 .fixed { position: fixed; }
 .absolute { position: absolute; }
