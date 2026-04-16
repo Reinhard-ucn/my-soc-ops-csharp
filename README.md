@@ -4,53 +4,54 @@
 
 Social Bingo game for in-person mixers. Find people who match the questions and get 5 in a row!
 
-🎮 **[Play the Game](https://dotnet-presentations.github.io/vscode-github-copilot-agent-lab/)** • 📚 **[View Lab Guide](https://dotnet-presentations.github.io/vscode-github-copilot-agent-lab/docs/)**
+🎮 **[Play the Game](https://dotnet-presentations.github.io/vscode-github-copilot-agent-lab/)** • 📚 **[Lab Guide](workshop/)**
 
 ---
 
-## 📚 Lab Guide
+## ✅ Pre-Commit Checklist
 
-| Part | Title |
-|------|-------|
-| [**00**](https://dotnet-presentations.github.io/vscode-github-copilot-agent-lab/docs/step.html?step=00-overview) | Overview & Checklist |
-| [**01**](https://dotnet-presentations.github.io/vscode-github-copilot-agent-lab/docs/step.html?step=01-setup) | Setup & Context Engineering |
-| [**02**](https://dotnet-presentations.github.io/vscode-github-copilot-agent-lab/docs/step.html?step=02-design) | Design-First Frontend |
-| [**03**](https://dotnet-presentations.github.io/vscode-github-copilot-agent-lab/docs/step.html?step=03-quiz-master) | Custom Quiz Master |
-| [**04**](https://dotnet-presentations.github.io/vscode-github-copilot-agent-lab/docs/step.html?step=04-multi-agent) | Multi-Agent Development |
+Before committing, run these checks from `SocOps/`:
 
-> 📝 Lab guides are also available in the [`workshop/`](workshop/) folder for offline reading.
+```bash
+# 1. Lint (C# code style)
+dotnet format --verify-no-changes --verbosity diagnostic
+
+# 2. Build (compile with no warnings)
+dotnet build
+
+# 3. Test (run any test suites)
+dotnet test
+```
 
 ---
 
-## Prerequisites
+## 🚀 Quick Start
 
-- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) or higher
-
-## Open in GitHub Codespaces (optional)
-
-After creating your own repo from this template:
-
-1. Open your repo on GitHub
-2. Click **Code** → **Codespaces** → **Create codespace on main**
-3. Wait for the devcontainer to finish setup
-4. From the repository root, run:
-   ```bash
-   cd SocOps
-   dotnet run
-   ```
-
-## Run
+**Prerequisites**: [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) or higher
 
 ```bash
 cd SocOps
 dotnet run
 ```
 
-## Build
+Open http://localhost:5166 in your browser.
 
-```bash
-cd SocOps
-dotnet build
-```
+---
+
+## 📚 Lab Modules
+
+- [Overview & Checklist](workshop/00-overview.md)
+- [Setup & Context Engineering](workshop/01-setup.md)
+- [Design-First Frontend](workshop/02-design.md)
+- [Custom Quiz Master](workshop/03-quiz-master.md)
+- [Multi-Agent Development](workshop/04-multi-agent.md)
+
+---
+
+## 🔗 Codespaces
+
+1. Click **Code** → **Codespaces** → **Create codespace on main**
+2. Wait for devcontainer setup
+3. Run `cd SocOps && dotnet run`
 
 Deploys automatically to GitHub Pages on push to `main`.

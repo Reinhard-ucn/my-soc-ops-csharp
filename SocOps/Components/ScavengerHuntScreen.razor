@@ -1,0 +1,84 @@
+@using SocOps.Models
+@using SocOps.Services
+@inject BingoGameService GameService
+@implements IAsyncDisposable
+
+<div class="flex flex-col items-center justify-center min-h-full p-6 bg-gradient-to-b from-blue-800 to-blue-900 relative overflow-hidden">
+    <!-- Header -->
+    <div class="w-full flex justify-between items-center mb-6 max-w-2xl">
+        <button
+            @onclick="OnBack"
+            class="text-white font-bold text-sm hover:brightness-110"
+            style="letter-spacing: 0.05em; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+            ← BACK
+        </button>
+        <h1 class="text-4xl font-bold text-white" style="letter-spacing: 0.08em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">🔍 SCAVENGER HUNT</h1>
+        <div style="width: 60px;"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="w-full max-w-2xl bg-white rounded-lg pixel-shadow-lg overflow-hidden border-4 border-gray-900">
+        <!-- Progress Section -->
+        <ScavengerHuntProgress />
+
+        <!-- Items List Container -->
+        <div class="px-6 pb-6 space-y-3 max-h-96 overflow-y-auto">
+            @foreach (var item in GameService.ScavengerHuntItems)
+            {
+                <ScavengerHuntItem 
+                    Item="@item" 
+                    OnItemClick="@HandleItemClick" />
+            }
+        </div>
+    </div>
+
+    <!-- Completion Modal -->
+    @if (GameService.ShowScavengerHuntCompletionModal && GameService.CurrentGameState == GameState.ScavengerHuntComplete)
+    {
+        <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div class="bg-yellow-400 text-gray-900 rounded-lg pixel-border pixel-shadow-lg p-8 text-center max-w-sm animate-scale-in border-4 border-gray-900">
+                <div class="text-6xl mb-4">🎉</div>
+                <h2 class="text-3xl font-bold mb-2" style="letter-spacing: 0.1em;">SCAVENGER HUNT COMPLETE!</h2>
+                <p class="text-lg mb-6 font-semibold">You've found them all!</p>
+                <button
+                    @onclick="OnDismiss"
+                    class="w-full bg-red-600 text-white font-bold py-3 px-6 mario-btn text-lg border-4 border-gray-900 hover:bg-red-700"
+                    style="letter-spacing: 0.1em;">
+                    BACK TO START
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        GameService.OnStateChanged += StateHasChanged;
+        await Task.CompletedTask;
+    }
+
+    private async Task HandleItemClick(int itemId)
+    {
+        GameService.HandleScavengerHuntItemClick(itemId);
+        await Task.CompletedTask;
+    }
+
+    private async Task OnBack()
+    {
+        GameService.ResetGame();
+        await Task.CompletedTask;
+    }
+
+    private async Task OnDismiss()
+    {
+        GameService.DismissScavengerHuntCompletion();
+        await Task.CompletedTask;
+    }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        GameService.OnStateChanged -= StateHasChanged;
+        await ValueTask.CompletedTask;
+    }
+}

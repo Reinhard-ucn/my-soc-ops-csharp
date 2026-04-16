@@ -1,0 +1,21 @@
+@using SocOps.Services
+@using SocOps.Models
+@inject BingoGameService GameService
+
+<div class="px-6 pt-6 pb-4 bg-gradient-to-r from-blue-700 to-blue-800 text-white border-b-4 border-gray-900">
+    @{
+        var (checkedCount, totalCount, percentage) = ScavengerHuntLogicService.GetProgress(GameService.ScavengerHuntItems);
+    }
+    <!-- Progress Text -->
+    <div class="text-center mb-4">
+        <h2 class="text-3xl font-bold text-white" style="letter-spacing: 0.05em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">@checkedCount / @totalCount (@percentage.ToString("F0")%)</h2>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="w-full bg-gray-800 rounded height-2 border-2 border-gray-900" style="height: 16px; overflow: hidden;">
+        <div class="bg-gradient-to-r from-green-500 to-green-600 h-full transition-all duration-300" style="width: @percentage.ToString("F0")%;"></div>
+    </div>
+</div>
+
+@code {
+}

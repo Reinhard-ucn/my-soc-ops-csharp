@@ -2,13 +2,17 @@
 @using SocOps.Models
 @using SocOps.Services
 @inject BingoGameService GameService
-@implements IDisposable
+@implements IAsyncDisposable
 
 <PageTitle>Soc Ops - Social Bingo</PageTitle>
 
 @if (GameService.CurrentGameState == GameState.Start)
 {
-    <StartScreen OnStart="@GameService.StartGame" />
+    <StartScreen OnStart="@GameService.StartGame" OnStartScavengerHunt="@GameService.StartScavengerHunt" />
+}
+else if (GameService.CurrentGameState == GameState.ScavengerHunt || GameService.CurrentGameState == GameState.ScavengerHuntComplete)
+{
+    <ScavengerHuntScreen />
 }
 else
 {
@@ -32,8 +36,9 @@ else
         GameService.OnStateChanged += StateHasChanged;
     }
 
-    public void Dispose()
+    async ValueTask IAsyncDisposable.DisposeAsync()
     {
         GameService.OnStateChanged -= StateHasChanged;
+        await ValueTask.CompletedTask;
     }
 }

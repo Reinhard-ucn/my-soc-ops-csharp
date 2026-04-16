@@ -1,3 +1,14 @@
+/* Mario Bros Theme Color Palette */
+:root {
+    --mario-red: #e63946;
+    --mario-green: #06a77d;
+    --mario-gold: #ffd60a;
+    --mario-blue: #457b9d;
+    --mario-black: #1a1a1a;
+    --mario-white: #ffffff;
+    --mario-shadow: #4a4a4a;
+}
+
 html,
 body,
 #app {
@@ -17,6 +28,7 @@ body {
 .w-16 { width: 4rem; }
 .max-w-sm { max-width: 24rem; }
 .max-w-md { max-width: 28rem; }
+.max-w-2xl { max-width: 42rem; }
 .max-w-xs { max-width: 20rem; }
 
 .flex { display: flex; }
@@ -29,6 +41,9 @@ body {
 .grid { display: grid; }
 .grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
 
 .p-1 { padding: 0.25rem; }
 .p-3 { padding: 0.75rem; }
@@ -58,6 +73,11 @@ body {
 .bg-accent { background-color: #2563eb; }
 .bg-marked { background-color: #dcfce7; }
 .bg-black\/50 { background-color: rgba(0, 0, 0, 0.5); }
+.bg-mario-red { background-color: var(--mario-red); }
+.bg-mario-green { background-color: var(--mario-green); }
+.bg-mario-gold { background-color: var(--mario-gold); }
+.bg-mario-blue { background-color: var(--mario-blue); }
+.bg-brick { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8c 100%); }
 
 .text-white { color: #ffffff; }
 .text-gray-500 { color: #6b7280; }
@@ -70,6 +90,11 @@ body {
 .text-amber-500 { color: #f59e0b; }
 .text-amber-800 { color: #92400e; }
 .text-amber-900 { color: #78350f; }
+.text-mario-black { color: var(--mario-black); }
+.text-mario-white { color: var(--mario-white); }
+.text-mario-gold { color: var(--mario-gold); }
+.text-mario-red { color: var(--mario-red); }
+.text-mario-green { color: var(--mario-green); }
 
 .text-xs { font-size: 0.75rem; line-height: 1rem; }
 .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
@@ -84,12 +109,32 @@ body {
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 
+.line-through { text-decoration: line-through; }
+.opacity-60 { opacity: 0.6; }
+.opacity-70 { opacity: 0.7; }
+.opacity-90 { opacity: 0.9; }
+
+.h-6 { height: 1.5rem; }
+.max-h-96 { max-height: 24rem; }
+
+.overflow-hidden { overflow: hidden; }
+.overflow-y-auto { overflow-y: auto; }
+
+.cursor-pointer { cursor: pointer; }
+
+.hover\:brightness-95:hover { filter: brightness(0.95); }
+.hover\:brightness-110:hover { filter: brightness(1.1); }
+.hover\:shadow-md:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+
 .border { border-width: 1px; }
 .border-b { border-bottom-width: 1px; }
 .border-gray-200 { border-color: #e5e7eb; }
 .border-gray-300 { border-color: #d1d5db; }
 .border-amber-400 { border-color: #fbbf24; }
 .border-marked-border { border-color: #22c55e; }
+.pixel-border { border: 4px solid var(--mario-black); }
+.pixel-border-gold { border: 4px solid var(--mario-gold); }
+.pixel-border-green { border: 4px solid var(--mario-green); }
 
 .rounded { border-radius: 0.25rem; }
 .rounded-lg { border-radius: 0.5rem; }
@@ -97,6 +142,59 @@ body {
 
 .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
 .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+.pixel-shadow { box-shadow: 4px 4px 0px var(--mario-shadow); }
+.pixel-shadow-lg { box-shadow: 6px 6px 0px var(--mario-shadow); }
+
+/* Mario Panel/Card Styling */
+.mario-panel {
+    border: 4px solid var(--mario-black);
+    box-shadow: 4px 4px 0px var(--mario-shadow);
+    background-color: var(--mario-white);
+    opacity: 0.98;
+}
+
+.mario-panel-red {
+    background-color: #d63230;
+    color: var(--mario-white);
+    font-weight: 600;
+}
+
+.mario-panel-blue {
+    background-color: #2d5a8c;
+    color: var(--mario-white);
+    font-weight: 600;
+}
+
+.mario-panel-gold {
+    background-color: #ffc107;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.mario-panel-green {
+    background-color: #059b6f;
+    color: var(--mario-white);
+    font-weight: 600;
+}
+
+.mario-btn {
+    border: 4px solid var(--mario-black);
+    box-shadow: 4px 4px 0px var(--mario-shadow);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mario-btn:hover {
+    brightness: 1.1;
+    transform: translate(-1px, -1px);
+}
+
+.mario-btn:active {
+    brightness: 0.9;
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--mario-shadow);
+}
 
 .space-y-2 > * + * { margin-top: 0.5rem; }
 
@@ -160,6 +258,116 @@ button:disabled {
 
 .animate-\[bounce_0\.5s_ease-out\] {
     animation: bounce 0.5s ease-out;
+}
+
+@keyframes blockBounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
+
+@keyframes coinPop {
+    0% {
+        opacity: 1;
+        transform: scale(0.3) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.2) translateY(-40px);
+    }
+}
+
+@keyframes pixelFlash {
+    0% { opacity: 0.8; }
+    100% { opacity: 0; }
+}
+
+.animate-block-bounce {
+    animation: blockBounce 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-coin-pop {
+    animation: coinPop 0.6s ease-out forwards;
+}
+
+.animate-pixel-flash {
+    animation: pixelFlash 0.2s ease-out forwards;
+}
+
+/* Landing Page Animations */
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes coinFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-15px) rotate(180deg);
+    }
+}
+
+.animate-fade-in-down {
+    animation: fadeInDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+}
+
+.animate-coin-float {
+    animation: coinFloat 3s ease-in-out infinite;
 }
 
 #blazor-error-ui {
@@ -226,3 +434,125 @@ button:disabled {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
     }
+
+/* Scavenger Hunt Styles */
+.scavenger-hunt-container {
+    max-height: calc(100vh - 320px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+.scavenger-hunt-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: var(--mario-white);
+    border: 4px solid var(--mario-black);
+    border-radius: 0.25rem;
+    box-shadow: 4px 4px 0px var(--mario-shadow);
+    cursor: pointer;
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scavenger-hunt-item:hover {
+    filter: brightness(0.95);
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px var(--mario-shadow);
+}
+
+.scavenger-hunt-item.checked {
+    background-color: var(--mario-green);
+    color: var(--mario-white);
+    border-color: var(--mario-green);
+}
+
+.scavenger-hunt-item.checked:hover {
+    filter: brightness(1.05);
+}
+
+.scavenger-hunt-checkbox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    min-width: 1.5rem;
+    border: 3px solid var(--mario-black);
+    background-color: var(--mario-white);
+    margin-top: 0.125rem;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.scavenger-hunt-item.checked .scavenger-hunt-checkbox {
+    background-color: var(--mario-green);
+    border-color: var(--mario-green);
+    color: var(--mario-white);
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.scavenger-hunt-question {
+    flex: 1 1 0%;
+    word-break: break-word;
+    hyphens: auto;
+    line-height: 1.25;
+    font-size: 0.95rem;
+}
+
+.scavenger-hunt-progress {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    background-color: var(--mario-white);
+    border-bottom: 4px solid var(--mario-black);
+    margin-bottom: 1rem;
+}
+
+.scavenger-hunt-progress-text {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--mario-black);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.scavenger-hunt-progress-bar {
+    width: 100%;
+    height: 12px;
+    background-color: #e5e7eb;
+    border: 2px solid var(--mario-black);
+    border-radius: 0.125rem;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.scavenger-hunt-progress-fill {
+    height: 100%;
+    background-color: var(--mario-green);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 4px;
+}
+
+.scavenger-hunt-progress-fill.full {
+    background: linear-gradient(90deg, var(--mario-gold), var(--mario-green));
+    animation: pulse-success 0.6s ease-out;
+}
+
+@keyframes pulse-success {
+    0% {
+        box-shadow: 0 0 0 0 rgba(6, 168, 125, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(6, 168, 125, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(6, 168, 125, 0);
+    }
+}

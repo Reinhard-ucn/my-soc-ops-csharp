@@ -16,6 +16,8 @@ public class BingoGameService
     public BingoLine? WinningLine { get; private set; }
     public HashSet<int> WinningSquareIds => BingoLogicService.GetWinningSquareIds(WinningLine);
     public bool ShowBingoModal { get; private set; }
+    public List<HuntTask> ScavengerHuntItems { get; private set; } = new();
+    public bool ShowScavengerHuntCompletionModal { get; private set; }
 
     public event Action? OnStateChanged;
 
@@ -75,6 +77,39 @@ public class BingoGameService
         NotifyStateChanged();
     }
 
+    public void StartScavengerHunt()
+    {
+        ScavengerHuntItems = ScavengerHuntLogicService.GenerateHunt();
+        CurrentGameState = GameState.ScavengerHunt;
+        ShowScavengerHuntCompletionModal = false;
+        _ = SaveGameStateAsync(); // Fire and forget
+        NotifyStateChanged();
+    }
+
+    public void HandleScavengerHuntItemClick(int itemId)
+    {
+        ScavengerHuntItems = ScavengerHuntLogicService.ToggleItem(ScavengerHuntItems, itemId);
+
+        // Check if hunt is complete
+        if (ScavengerHuntLogicService.IsHuntComplete(ScavengerHuntItems))
+        {
+            CurrentGameState = GameState.ScavengerHuntComplete;
+            ShowScavengerHuntCompletionModal = true;
+        }
+
+        _ = SaveGameStateAsync(); // Fire and forget
+        NotifyStateChanged();
+    }
+
+    public void DismissScavengerHuntCompletion()
+    {
+        CurrentGameState = GameState.Start;
+        ScavengerHuntItems = new();
+        ShowScavengerHuntCompletionModal = false;
+        _ = SaveGameStateAsync(); // Fire and forget
+        NotifyStateChanged();
+    }
+
     private void NotifyStateChanged() => OnStateChanged?.Invoke();
 
     private async Task LoadGameStateAsync()
@@ -90,6 +125,7 @@ public class BingoGameService
                     CurrentGameState = data.GameState;
                     Board = data.Board;
                     WinningLine = data.WinningLine;
+                    ScavengerHuntItems = data.ScavengerHuntItems ?? new();
                 }
             }
         }
@@ -108,7 +144,8 @@ public class BingoGameService
                 Version = STORAGE_VERSION,
                 GameState = CurrentGameState,
                 Board = Board,
-                WinningLine = WinningLine
+                WinningLine = WinningLine,
+                ScavengerHuntItems = ScavengerHuntItems
             };
             var json = JsonSerializer.Serialize(data);
             await _jsRuntime.InvokeVoidAsync("localStorage.setItem", STORAGE_KEY, json);
@@ -125,5 +162,6 @@ public class BingoGameService
         public GameState GameState { get; set; }
         public List<BingoSquareData> Board { get; set; } = new();
         public BingoLine? WinningLine { get; set; }
+        public List<HuntTask> ScavengerHuntItems { get; set; } = new();
     }
 }

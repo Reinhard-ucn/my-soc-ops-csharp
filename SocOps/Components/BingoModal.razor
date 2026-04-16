@@ -1,13 +1,19 @@
-<div class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-xl p-6 max-w-xs w-full text-center shadow-xl animate-[bounce_0.5s_ease-out]">
-        <div class="text-5xl mb-4">🎉</div>
-        <h2 class="text-3xl font-bold text-amber-500 mb-2">BINGO!</h2>
-        <p class="text-gray-600 mb-6">You completed a line!</p>
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 animate-pixel-flash">
+    <div class="bg-yellow-400 pixel-border pixel-shadow-lg p-6 max-w-xs w-full text-center animate-[bounce_0.5s_ease-out] border-4 border-gray-900">
+        <div class="text-5xl mb-3">🎮</div>
+        <h2 class="text-4xl font-bold text-gray-900 mb-2" style="letter-spacing: 0.1em;">BINGO!</h2>
+        <p class="text-gray-900 mb-6 font-bold">YOU GOT 5 IN A ROW!</p>
+        
+        <div class="flex justify-center gap-3 mb-6">
+            <span class="text-3xl animate-coin-pop">🪙</span>
+            <span class="text-3xl animate-coin-pop" style="animation-delay: 0.1s">🪙</span>
+            <span class="text-3xl animate-coin-pop" style="animation-delay: 0.2s">🪙</span>
+        </div>
 
         <button
             @onclick="OnDismiss"
-            class="w-full bg-accent text-white font-semibold py-3 px-6 rounded-lg active:bg-accent-light transition-colors">
-            Keep Playing
+            class="w-full bg-red-600 text-white font-bold py-3 px-6 pixel-border pixel-shadow transition-all hover:brightness-110 border-4 border-gray-900 hover:bg-red-700">
+            KEEP PLAYING
         </button>
     </div>
 </div>

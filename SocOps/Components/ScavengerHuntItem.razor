@@ -1,0 +1,45 @@
+@using SocOps.Models
+
+<div class="flex items-center gap-4 p-4 bg-white border-4 border-gray-900 rounded-lg hover:brightness-95 transition-all cursor-pointer hover:shadow-lg" @onclick="OnClick" style="user-select: none;">
+    <!-- Custom Checkbox -->
+    <div class="flex-shrink-0 w-7 h-7 rounded border-3 flex items-center justify-center transition-all font-bold"
+         style="@GetCheckboxStyle()">
+        @if (Item.IsChecked)
+        {
+            <span class="text-white text-lg">✓</span>
+        }
+    </div>
+
+    <!-- Question Text -->
+    <p class="flex-1 text-gray-900 font-semibold text-sm md:text-base @(Item.IsChecked ? "line-through opacity-50" : "")">
+        @Item.Question
+    </p>
+
+    <!-- Optional: Show checkmark icon on the right -->
+    @if (Item.IsChecked)
+    {
+        <div class="flex-shrink-0 text-green-600 text-lg">✅</div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public HuntTask Item { get; set; } = new();
+
+    [Parameter]
+    public EventCallback<int> OnItemClick { get; set; }
+
+    private string GetCheckboxStyle()
+    {
+        if (Item.IsChecked)
+        {
+            return "background-color: #059b6f; border-color: #059b6f;";
+        }
+        return "background-color: white; border-color: #1a1a1a;";
+    }
+
+    private async Task OnClick()
+    {
+        await OnItemClick.InvokeAsync(Item.Id);
+    }
+}

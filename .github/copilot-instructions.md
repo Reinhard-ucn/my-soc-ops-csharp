@@ -187,6 +187,172 @@ When redesigning UI components or adding new features:
 
 ---
 
+## 🎮 Mario Bros Design System
+
+The game uses a **retro 8-bit Mario Bros aesthetic** with pixel-art styling, chunky typography, and playful animations.
+
+### Color Palette
+
+Define colors via CSS custom properties in `:root` (see `wwwroot/css/app.css`):
+
+```css
+:root {
+    --mario-red: #e63946;        /* Primary actions, danger */
+    --mario-green: #06a77d;      /* Success, marked squares */
+    --mario-gold: #ffd60a;       /* Bonus, bingo celebration */
+    --mario-blue: #457b9d;       /* Secondary, pipe theme */
+    --mario-black: #1a1a1a;      /* Text, outlines, shadows */
+    --mario-white: #ffffff;      /* Backgrounds, text */
+    --mario-shadow: #4a4a4a;     /* Depth effect */
+}
+```
+
+**Usage in components:**
+- Red (`.bg-mario-red`, `.text-mario-red`): Start button, danger states
+- Green (`.bg-mario-green`, `.text-mario-green`): Marked squares, success feedback
+- Gold (`.bg-mario-gold`, `.text-mario-gold`): Bingo celebration, highlights
+- Blue (`.bg-mario-blue`, `.text-mario-blue`): Header, free space, secondary elements
+- Black (`.text-mario-black`): Primary text, borders
+- White (`.text-mario-white`, `.bg-mario-white`): Backgrounds, high contrast text
+
+### Pixel-Art Utilities
+
+**Thick Borders** (`.pixel-border`):
+```css
+border: 4px solid var(--mario-black);
+```
+Creates authentic chunky 8-bit square outlines. Use on all clickable elements and cards.
+
+**Pixel Shadows** (`.pixel-shadow`, `.pixel-shadow-lg`):
+```css
+.pixel-shadow { box-shadow: 4px 4px 0px var(--mario-shadow); }
+.pixel-shadow-lg { box-shadow: 6px 6px 0px var(--mario-shadow); }
+```
+Displaced shadow effect for 3D depth. Larger games use `-lg`, buttons use standard.
+
+**Brick Background** (`.bg-brick`):
+```css
+background-image: linear-gradient(135deg, #d2691e 25%, transparent 25%), 
+                  linear-gradient(225deg, #d2691e 25%, transparent 25%), ...
+background-color: #8b4513;
+```
+Retro brown brick pattern. Use on full-screen backgrounds (StartScreen, GameScreen).
+
+### Component Styling Guidelines
+
+#### StartScreen
+- **Title**: Large/bold (`text-5xl font-bold`), white text on brick background, with `pixel-shadow-lg`
+- **Subtitle**: Gold text, caps, letter-spacing 0.05em
+- **Card**: White bg, `pixel-border`, `pixel-shadow`, black inner text
+- **Button**: Red bg, white text, caps, `pixel-border`, `pixel-shadow`, no rounded corners
+
+#### GameScreen
+- **Header**: Pipe blue background (`bg-mario-blue`), white text, `pixel-border` bottom
+- **Back button**: White text, no border, hover brightens text
+- **Background**: Brick pattern (`.bg-brick`)
+- **Bingo indicator**: Gold background with black text and border
+
+#### BingoBoard
+- **Grid spacing**: `gap-2` (wider gaps than default for pixel clarity)
+- **Aspect ratio**: `aspect-square` (1:1 ratio for playfield)
+
+#### BingoSquare (Button states)
+- **Unmarked**: 
+  - White bg, black `pixel-border`, black text
+  - Hover: `brightness-95` (darkens slightly)
+  
+- **Marked (non-winning)**:
+  - Green bg (`bg-mario-green`), white text, `pixel-shadow`
+  - Checkmark (✓): Top-right corner
+  - Animation: None (static)
+  
+- **Marked (winning line)**:
+  - Gold bg (`bg-mario-gold`), black text, `pixel-shadow`
+  - Applies `.animate-block-bounce` (elastic pop effect)
+  
+- **Free space**:
+  - Blue bg (`bg-mario-blue`), white text, bold caps
+  - Disabled state (no click handler)
+
+#### BingoModal (Bingo celebration)
+- **Background**: Gold (`bg-mario-gold`)
+- **Text**: Black, bold, caps, letter-spacing
+- **Border**: `pixel-border` (black)
+- **Shadow**: `pixel-shadow-lg`
+- **Emoji**: Game controller (🎮) or trophy
+- **Coins**: 3× coin emoji (💰) with `animate-coin-pop` and staggered delays
+- **Button**: Red with white text, `pixel-border`, `pixel-shadow`
+
+### Animation Specifications
+
+**blockBounce** (0.3s, elastic):
+```css
+@keyframes blockBounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
+```
+Applied to marked winning squares on click. Creates satisfying spring effect.
+
+**coinPop** (0.6s, ascending fade):
+```css
+@keyframes coinPop {
+    0% { opacity: 1; transform: scale(0.3) translateY(0); }
+    100% { opacity: 0; transform: scale(1.2) translateY(-40px); }
+}
+```
+Applied to coin emojis in bingo modal. Stagger with `animation-delay: 0.1s`, `0.2s`, etc.
+
+**pixelFlash** (0.2s, white overlay):
+```css
+@keyframes pixelFlash {
+    0% { opacity: 0.8; }
+    100% { opacity: 0; }
+}
+```
+Applied to modal backdrop on bingo win (celebration flash).
+
+### Typography
+
+- **Font family**: System fonts (`system-ui, -apple-system, sans-serif`) for performance
+- **Weight**: Bold (700) for all interactive text, headings
+- **Letter spacing**: Add `style="letter-spacing: 0.05em"` or `0.1em` to titles for pixel feel
+- **Case**: Use CAPS for titles, buttons, and emphasis (e.g., "SOC OPS", "START GAME")
+
+### Extending the Theme
+
+**Adding new colors:**
+1. Add CSS variable to `:root`:
+   ```css
+   --mario-new: #hexcode;
+   ```
+2. Create utility classes:
+   ```css
+   .bg-mario-new { background-color: var(--mario-new); }
+   .text-mario-new { color: var(--mario-new); }
+   ```
+3. Use in components: `class="bg-mario-new text-mario-white"`
+
+**Adding new animations:**
+1. Define `@keyframes` in `app.css`
+2. Create animation class:
+   ```css
+   .animate-my-effect {
+       animation: myKeyframe 0.5s cubic-bezier(...);
+   }
+   ```
+3. Apply in Razor: Bind via `@GetCssClasses()` method or inline
+
+**Maintaining consistency:**
+- Always use pixel borders on clickable elements (buttons, cards)
+- Pair shadows with borders (no floating elements without structure)
+- Animate on interaction (click, hover), not idle states
+- Keep animations under 0.6s for snappy feel
+- Use `cubic-bezier(0.68, -0.55, 0.265, 1.55)` for elastic bounces
+
+---
+
 ## ✅ Quality Checklist
 
 Before committing changes:
